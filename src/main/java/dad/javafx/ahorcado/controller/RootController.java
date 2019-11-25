@@ -130,7 +130,6 @@ public class RootController implements Initializable{
 	}
 	public void initialize(URL location, ResourceBundle resources) {
 		// bindeos
-	System.out.println("initia");
 	palabrasListView.itemsProperty().bind(rootmodel.palabrasProperty());
 	puntuacionesListView.itemsProperty().bind(rootmodel.puntuacionesProperty());
 	palabraLabel.textProperty().bind(rootmodel.ocultaProperty());
@@ -177,7 +176,7 @@ public class RootController implements Initializable{
 		introducirTextField.clear();
 		}
 	
-	public void perder() {
+	private void perder() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Ahorcado");
 		dialog.setHeaderText("¡Perdiste!");
@@ -186,10 +185,18 @@ public class RootController implements Initializable{
 		if (result.isPresent()){
 		    rootmodel.puntuacionesProperty().add(new Puntuacion(result.get(),rootmodel.getPuntuacion()));
 		}
-		iniciarJuego();
+		ResetearJuego();
 		
 	}
-	
+	private void ResetearJuego() {
+		rootmodel.setPalabra((AhorcadoFunciones.cogerPalabra(rootmodel.getPalabras())));
+		rootmodel.setOculta(AhorcadoFunciones.generarOculta(rootmodel.getPalabra()));
+		rootmodel.setLetras("");
+		rootmodel.setImagen((new Image("/images/1.png")));
+		rootmodel.setPuntuacion(0);
+		rootmodel.setVidas(8);
+		
+	}
 	
 	public void iniciarJuego() {
 		rootmodel.setPalabra((AhorcadoFunciones.cogerPalabra(rootmodel.getPalabras())));

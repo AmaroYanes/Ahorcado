@@ -158,8 +158,4 @@ public class RootModel {
 	public final void setLetras(final String letras) {
 		this.letrasProperty().set(letras);
 	}
-	
-	
-	
-	
 }
