@@ -35,9 +35,12 @@ public class RootModel {
 		palabra = new SimpleStringProperty();
 		oculta = new SimpleStringProperty();
 		puntuacion = new SimpleIntegerProperty();
+		puntuacion.set(0);
 		vidas = new SimpleIntegerProperty();
+		vidas.set(8);
 		letras = new SimpleStringProperty();
 		imagen = new SimpleObjectProperty<Image>();
+		imagen.set(new Image("/images/1.png"));
 	}
 
 	public final ListProperty<Puntuacion> puntuacionesProperty() {

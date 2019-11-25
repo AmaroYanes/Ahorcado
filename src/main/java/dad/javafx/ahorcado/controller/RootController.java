@@ -149,10 +149,10 @@ public class RootController implements Initializable{
 	}
 	private void onResolverButton() {
 		if(introducirTextField.getText().trim().equals(rootmodel.getPalabra())) {
-			rootmodel.setPuntuacion(rootmodel.getPalabra().length());
-			ganar();
+			rootmodel.setPuntuacion(AhorcadoFunciones.cantidadSinResolver(rootmodel.getOculta())+rootmodel.getPuntuacion());
+			iniciarJuego();
+			introducirTextField.clear();
 		}
-		
 	}
 	private void onLetraButton() {
 		String nuevo = AhorcadoFunciones.cambiarString(rootmodel.getPalabra(),rootmodel.getOculta(),introducirTextField.getText().trim().charAt(0));
@@ -161,7 +161,7 @@ public class RootController implements Initializable{
 			rootmodel.setPuntuacion((int) rootmodel.puntuacionProperty().add(1.0).doubleValue());
 			rootmodel.setOculta(nuevo);
 			if(nuevo.equals(rootmodel.getPalabra())) {
-				ganar();	
+				iniciarJuego();	
 				
 			}
 			//fallar
@@ -178,34 +178,22 @@ public class RootController implements Initializable{
 		}
 	
 	public void perder() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle(":(");
-		alert.setHeaderText("Game Over");
-		alert.setContentText("Perdiste intentalo de nuevo");
-		alert.showAndWait();
-		iniciarJuego();
-		
-	}
-	
-	
-	public void ganar() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Ahorcado");
-		dialog.setHeaderText("¡Has ganado!");
+		dialog.setHeaderText("¡Perdiste!");
 		dialog.setContentText("introduce tu nombre para poder guardar tu puntuación");
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
 		    rootmodel.puntuacionesProperty().add(new Puntuacion(result.get(),rootmodel.getPuntuacion()));
 		}
 		iniciarJuego();
-	}	
+		
+	}
+	
 	
 	public void iniciarJuego() {
 		rootmodel.setPalabra((AhorcadoFunciones.cogerPalabra(rootmodel.getPalabras())));
 		rootmodel.setOculta(AhorcadoFunciones.generarOculta(rootmodel.getPalabra()));
-		rootmodel.imagenProperty().set(new Image("/images/1.png"));
-		rootmodel.setPuntuacion(0);
-		rootmodel.setVidas(8);
 		rootmodel.setLetras("");
 		
 	}

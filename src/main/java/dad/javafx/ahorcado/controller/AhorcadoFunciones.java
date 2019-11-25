@@ -23,4 +23,12 @@ public class AhorcadoFunciones {
 		}
 		return novo.toString();
 	}
+	public static int cantidadSinResolver(String oculta) {
+		int cantidad = 0;
+		for(int i = 0; i < oculta.length();i++) {
+			if(oculta.charAt(i)=='_')cantidad++;
+		}
+		
+		return cantidad;
+	}
 }
