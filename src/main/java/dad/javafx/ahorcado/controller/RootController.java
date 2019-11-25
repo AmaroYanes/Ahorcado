@@ -137,7 +137,6 @@ public class RootController implements Initializable{
 	vidaLabel.textProperty().bind(rootmodel.vidasProperty().asString());
 	imagenImagenView.imageProperty().bind(rootmodel.imagenProperty());
 	letrasLabel.textProperty().bind(rootmodel.letrasProperty());
-	
 	anyadirButton.setOnAction(e -> onAnyadirButton());
 	quitarButton.setOnAction(e -> onQuitarButton());
 	letraButton.setOnAction(e -> onLetraButton());
@@ -154,7 +153,8 @@ public class RootController implements Initializable{
 		}
 	}
 	private void onLetraButton() {
-		String nuevo = AhorcadoFunciones.cambiarString(rootmodel.getPalabra(),rootmodel.getOculta(),introducirTextField.getText().trim().charAt(0));
+		char carac = introducirTextField.getText().trim().charAt(0);
+		String nuevo = AhorcadoFunciones.cambiarString(rootmodel.getPalabra(),rootmodel.getOculta(),carac);
 		//acertar
 		if(!nuevo.equals(rootmodel.getOculta())) {
 			rootmodel.setPuntuacion((int) rootmodel.puntuacionProperty().add(1.0).doubleValue());
@@ -165,9 +165,15 @@ public class RootController implements Initializable{
 			}
 			//fallar
 		}else{
-			rootmodel.setVidas((int) rootmodel.vidasProperty().subtract(1.0).doubleValue());
-			rootmodel.setImagen(new Image("/images/"+(9-rootmodel.getVidas())+".png"));
-			rootmodel.setLetras(rootmodel.getLetras().concat(introducirTextField.getText().charAt(0)+" "));
+			int i;
+			
+			String letras = rootmodel.getLetras();
+			for(i = 0; i < letras.length() && letras.charAt(i) != carac ;i++) {
+			}if(i==letras.length()) {
+				rootmodel.setLetras(letras.concat(introducirTextField.getText().charAt(0)+" "));
+				rootmodel.setVidas((int) rootmodel.vidasProperty().subtract(1.0).doubleValue());
+				rootmodel.setImagen(new Image("/images/"+(9-rootmodel.getVidas())+".png"));
+			}
 			if(rootmodel.getVidas()==0) {
 				perder();
 			}
