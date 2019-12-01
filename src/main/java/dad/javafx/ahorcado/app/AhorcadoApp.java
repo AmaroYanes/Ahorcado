@@ -21,7 +21,6 @@ public class AhorcadoApp extends Application {
 	//controller	
 	private RootController rootController;
 	
-	
 	public void start(Stage primaryStage) throws Exception {
 		Scene scene = new Scene(rootController.getView(),600,400);
 		primaryStage.setTitle("Ahorcado");

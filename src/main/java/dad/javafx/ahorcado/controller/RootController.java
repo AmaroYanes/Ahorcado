@@ -130,20 +130,17 @@ public class RootController implements Initializable{
 	}
 	public void initialize(URL location, ResourceBundle resources) {
 		// bindeos
-	palabrasListView.itemsProperty().bind(rootmodel.palabrasProperty());
-	puntuacionesListView.itemsProperty().bind(rootmodel.puntuacionesProperty());
-	palabraLabel.textProperty().bind(rootmodel.ocultaProperty());
-	puntosLabel.textProperty().bind(rootmodel.puntuacionProperty().asString());
-	vidaLabel.textProperty().bind(rootmodel.vidasProperty().asString());
-	imagenImagenView.imageProperty().bind(rootmodel.imagenProperty());
-	letrasLabel.textProperty().bind(rootmodel.letrasProperty());
-	anyadirButton.setOnAction(e -> onAnyadirButton());
-	quitarButton.setOnAction(e -> onQuitarButton());
-	letraButton.setOnAction(e -> onLetraButton());
-	resolverButton.setOnAction(e -> onResolverButton());
-	
-		
-		
+		palabrasListView.itemsProperty().bind(rootmodel.palabrasProperty());
+		puntuacionesListView.itemsProperty().bind(rootmodel.puntuacionesProperty());
+		palabraLabel.textProperty().bind(rootmodel.ocultaProperty());
+		puntosLabel.textProperty().bind(rootmodel.puntuacionProperty().asString());
+		vidaLabel.textProperty().bind(rootmodel.vidasProperty().asString());
+		imagenImagenView.imageProperty().bind(rootmodel.imagenProperty());
+		letrasLabel.textProperty().bind(rootmodel.letrasProperty());
+		anyadirButton.setOnAction(e -> onAnyadirButton());
+		quitarButton.setOnAction(e -> onQuitarButton());
+		letraButton.setOnAction(e -> onLetraButton());
+		resolverButton.setOnAction(e -> onResolverButton());
 	}
 	private void onResolverButton() {
 		if(introducirTextField.getText().trim().equals(rootmodel.getPalabra())) {
@@ -190,6 +187,7 @@ public class RootController implements Initializable{
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
 		    rootmodel.puntuacionesProperty().add(new Puntuacion(result.get(),rootmodel.getPuntuacion()));
+		    rootmodel.ordenar();
 		}
 		ResetearJuego();
 		

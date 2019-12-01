@@ -36,7 +36,7 @@ public class Puntuacion implements Comparable<Puntuacion>{
 	
 	
 	public int compareTo(Puntuacion o) {
-		return numero-o.getNumero();
+		return numero-o.getNumero();// si segundo es mayor sale negativo
 	}
 
 }

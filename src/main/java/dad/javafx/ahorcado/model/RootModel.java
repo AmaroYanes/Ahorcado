@@ -15,7 +15,7 @@ import javafx.scene.image.Image;
 public class RootModel {
 	
 	
-	ListProperty<Puntuacion> puntuaciones;
+	private ListProperty<Puntuacion> puntuaciones;
 	private ListProperty<String> palabras;
 	//palabra elegida aleatoriamente
 	private StringProperty palabra;
@@ -41,6 +41,21 @@ public class RootModel {
 		letras = new SimpleStringProperty();
 		imagen = new SimpleObjectProperty<Image>();
 		imagen.set(new Image("/images/1.png"));
+	}
+	public final void ordenar() {
+		Puntuacion aux;
+		boolean ordenado = true;
+		while (ordenado) {
+			ordenado = false;
+			for (int i = 0; i < puntuaciones.size() - 1; i++) {
+				if (puntuaciones.get(i).compareTo(puntuaciones.get(i + 1)) < 0) {
+					aux = puntuaciones.get(i + 1);
+					puntuaciones.set(i + 1, puntuaciones.get(i));
+					puntuaciones.set(i, aux);
+					ordenado = true;
+				}
+			} 
+		}
 	}
 
 	public final ListProperty<Puntuacion> puntuacionesProperty() {
